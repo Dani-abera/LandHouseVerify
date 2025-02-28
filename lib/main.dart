@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:land_house_verify/pages/landing/landing_page.dart';
-import 'package:land_house_verify/service_locator.dart';
-import 'package:land_house_verify/services/login_or_register.dart';
-import 'package:land_house_verify/themes/themes_provider.dart';
+import 'package:land_house_verify/presentation/pages/landing/landing_page.dart';
+import 'package:land_house_verify/core/service_locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart'; // ✅ Import Toastification
+import 'core/themes/themes_provider.dart';
+import 'data/services/login_or_register.dart';
 import 'firebase_options.dart';
 
 void main() async {
