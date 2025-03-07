@@ -43,7 +43,7 @@ class MyApp extends ConsumerWidget {
 
 
 class InitialScreen extends StatelessWidget {
-  const InitialScreen({Key? key}) : super(key: key);
+  const InitialScreen({super.key});
 
   Future<String> determineStartPage() async {
     final prefs = await SharedPreferences.getInstance();

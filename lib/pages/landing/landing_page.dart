@@ -4,7 +4,7 @@ import 'package:land_house_verify/services/login_or_register.dart';
 import 'landing_page_container.dart';
 
 class LandingPage extends StatelessWidget {
-  const LandingPage({Key? key}) : super(key: key);
+  const LandingPage({super.key});
 
 
   @override

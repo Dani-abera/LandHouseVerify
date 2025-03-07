@@ -4,6 +4,8 @@ import 'package:path/path.dart' as path_lib;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:toastification/toastification.dart';
 
+import '../../services/upload_file_service.dart';
+
 class RegisterValidatorPage extends StatefulWidget {
   final VoidCallback? onTap;
   const RegisterValidatorPage({super.key, this.onTap});
@@ -23,6 +25,7 @@ class _RegisterValidatorPageState extends State<RegisterValidatorPage> {
   String? _cvFilePath;
   String? _certificationFilePath;
   bool _isLoading = false;
+  String? _documentFile;
 
   /// Pick a document (CV or Certification)
   Future<void> _pickDocument({required Function(String) onFilePicked}) async {
@@ -33,6 +36,7 @@ class _RegisterValidatorPageState extends State<RegisterValidatorPage> {
       );
 
       if (result != null && result.files.single.path != null) {
+        _certificationFilePath = result.files.single.path;
         onFilePicked(result.files.single.path!);
         
       }
@@ -58,7 +62,8 @@ class _RegisterValidatorPageState extends State<RegisterValidatorPage> {
       
     _formKey.currentState!.save();
 
-    setState(() => _isLoading = true);
+     setState(() => _isLoading = true);
+          _certificationFilePath = await UploadFileService().uploadPDF(_documentFile!);
 
     final validatorData = {
       'validatorType': _validatorType,

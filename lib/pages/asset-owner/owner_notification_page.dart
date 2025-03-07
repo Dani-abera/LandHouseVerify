@@ -59,9 +59,12 @@ class OwnerNotificationPage extends ConsumerWidget {
                         if (value == 'View') {
                           // Open the report URL
                           try {
-                              final Uri url = Uri.parse(reportUrl);
-                              if (reportUrl.isNotEmpty && await canLaunchUrl(url)) {
-                                // Use `LaunchMode.externalApplication` for documents
+                            final Uri url = Uri.parse("http://10.0.2.2:3000$reportUrl");
+
+                            if (reportUrl.isNotEmpty) {
+                              bool canLaunch = await canLaunchUrl(url);
+
+                              if (canLaunch) {
                                 await launchUrl(url, mode: LaunchMode.externalApplication);
                               } else {
                                 toastification.show(
@@ -71,14 +74,22 @@ class OwnerNotificationPage extends ConsumerWidget {
                                   type: ToastificationType.error,
                                 );
                               }
-                            } catch (e) {
+                            } else {
                               toastification.show(
                                 context: context,
                                 title: const Text('Error'),
-                                description: Text('An error occurred: $e'),
+                                description: const Text('Report URL is empty'),
                                 type: ToastificationType.error,
                               );
                             }
+                          } catch (e) {
+                            toastification.show(
+                              context: context,
+                              title: const Text('Error'),
+                              description: Text('An error occurred: $e'),
+                              type: ToastificationType.error,
+                            );
+                          }
                         } else if (value == 'Delete') {
                           // Handle delete notification
                           onDelete(context, notificationId);

@@ -8,10 +8,9 @@ import 'dart:io';
 
 import 'package:get_it/get_it.dart';
 import 'package:land_house_verify/components/my_textFormField.dart';
-import 'package:land_house_verify/pages/admin/admin_page.dart';
 import 'package:land_house_verify/services/add_room_service.dart';
 import 'package:land_house_verify/services/asset_register_service.dart';
-import 'package:land_house_verify/services/cloudinary_file_upload_servise.dart';
+import 'package:land_house_verify/services/upload_file_service.dart';
 
 class AddRoomsPage extends StatefulWidget {
   final String assetId;
@@ -52,7 +51,7 @@ class _AddRoomsPageState extends State<AddRoomsPage> {
     }
 
     setState(() => _isLoading = true);
-    uploadedUrls = await CloudinaryFileUploadService().uploadMultipleImagesToCloudinary(roomCurrentPhoto);
+    uploadedUrls = await UploadFileService().uploadMultipleImages(roomCurrentPhoto);
 
     try {
       final result = await room.addRoom(

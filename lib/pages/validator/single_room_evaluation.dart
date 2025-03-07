@@ -23,11 +23,6 @@ class SingleRoomEvaluation extends StatefulWidget {
 class _SingleRoomEvaluationState extends State<SingleRoomEvaluation> {
   final _formKey = GlobalKey<FormState>();
 
-  // Controllers for basic information
-  final _nameController = TextEditingController();
-  final _valuatorNameController = TextEditingController();
-  final _valuationExecutorController = TextEditingController();
-
   double _calculateRoomCost() {
     double assetTotalArea = double.tryParse(widget.assetTotalArea) ?? 1.0;
     double assetTotalCost = double.tryParse(widget.assetTotalCost) ?? 0.0;
@@ -39,7 +34,6 @@ class _SingleRoomEvaluationState extends State<SingleRoomEvaluation> {
   double _calculateCostPerSquarMeter() {
     double assetTotalArea = double.tryParse(widget.assetTotalArea) ?? 1.0;
     double assetTotalCost = double.tryParse(widget.assetTotalCost) ?? 0.0;
-    double roomTotalArea = double.tryParse(widget.roomTotalArea) ?? 0.0;
 
     double costPerSquareMeter = assetTotalCost / assetTotalArea;
     return costPerSquareMeter;

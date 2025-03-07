@@ -118,11 +118,15 @@ class _RegisterPageState extends State<RegisterPage> {
                     hintText: 'Password',
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                          color: Theme.of(context).colorScheme.tertiary),
+                          color: Theme.of(context).colorScheme.inverseSurface),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                           color: Theme.of(context).colorScheme.primary),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.primary),
                     ),
                   ),
                 ),

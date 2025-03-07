@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:land_house_verify/services/cloudinary_file_upload_servise.dart';
 import 'package:land_house_verify/services/file_picker_service.dart';
+import 'package:land_house_verify/services/upload_file_service.dart';
 import 'package:toastification/toastification.dart';
 import 'labeled_row.dart';
 
@@ -73,8 +73,10 @@ class _MessageCardState extends State<MessageCard> {
   Future<void> handleFileUpload() async {
     try {
       String valuationReport = await FilePickerService().pickDocument();
-      String? uploadedDocumentUrl = await CloudinaryFileUploadService()
-          .uploadFileToFirebase(valuationReport, 'valuation-report');
+      String? uploadedDocumentUrl = await UploadFileService()
+          .uploadPDF(valuationReport);
+
+      print("document: $uploadedDocumentUrl");
       
       if (uploadedDocumentUrl != null) {
         await FirebaseFirestore.instance.collection("valuation-report").add({

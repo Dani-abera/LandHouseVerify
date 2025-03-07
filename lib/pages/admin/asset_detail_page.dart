@@ -1,12 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
-import 'package:land_house_verify/pages/admin/add_rooms.dart';
 import 'package:photo_view/photo_view.dart';
-
-import '../../components/my_button.dart';
 import '../../model/room_model.dart';
 import '../../services/add_room_service.dart';
 import '../../services/asset_register_service.dart';
@@ -27,7 +23,6 @@ class _AssetDetailPageState extends State<AssetDetailPage> {
   bool validatorAssigned = false;
   final AddRoomService _roomService = AddRoomService();
   List<RoomModel> rooms = [];
-  bool _isLoading = true;
 
   @override
   void initState() {
@@ -197,7 +192,6 @@ class _AssetDetailPageState extends State<AssetDetailPage> {
     List<RoomModel> fetchedRooms = await _roomService.fetchRoomsForAsset(widget.assetId);
     setState(() {
       rooms = fetchedRooms;
-      _isLoading = false;
     });
   }
 
@@ -224,29 +218,13 @@ class _AssetDetailPageState extends State<AssetDetailPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                  Expanded(
-                    child: Text(
+                 Text(
                       'Asset Name: ${data['assetName'] ?? 'Unknown'}',
                       style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => AddRoomsPage(id:data['assetId'], assetId:widget.assetId,)));
-                    },
-                    child: SizedBox(
-                      height: 40,
-                      width: 40,
-                      child: Image.asset("assets/images/add_rooms.png", fit: BoxFit.fill,),
-                    ),
-                  )
-                ],),
                 SizedBox(height:20),
                 SizedBox(
                   height: 300,
@@ -269,7 +247,7 @@ class _AssetDetailPageState extends State<AssetDetailPage> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Image.network(
-                              imageUrl,
+                              'http://10.0.2.2:3000$imageUrl',
                               fit: BoxFit.cover,
                               loadingBuilder:
                                   (context, child, loadingProgress) {
@@ -308,9 +286,6 @@ class _AssetDetailPageState extends State<AssetDetailPage> {
                     _buildInfoCard('Validation Status', data['status']),
                   ],
                 ),
-
-
-
                 const SizedBox(height: 20),
                 const Divider(),
                 const SizedBox(height: 20),

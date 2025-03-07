@@ -52,7 +52,7 @@ class LatestAssetsPage extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: Image.network(
-                        assetImage,
+                        'http://10.0.2.2:3000$assetImage',
                         height: 170,
                         width: 300,
                         fit: BoxFit.fill,
